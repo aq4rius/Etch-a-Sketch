@@ -1,22 +1,10 @@
 * {
-  margin: 0;
-  padding: 0;
+  box-sizing: border-box;
 }
 
 .container {
-  height: 322px;
-  width: 322px;
-  border: 1px solid;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-}
-.square {
-  height: 19px;
-  width: 19px;
+  display: grid;
+  height: 320px;
+  width: 320px;
   border: 1px solid;
 }
-
-/* .square:hover {
-  background-color: blue;
-} */
