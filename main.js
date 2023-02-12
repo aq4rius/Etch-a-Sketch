@@ -1,14 +1,18 @@
 const container = document.querySelector(".container");
-let squareNumberPerSide = prompt("How many squares per side?");
+const slider = document.querySelector("#slider");
+const output = document.querySelector("#value");
 
-let containerArea = 320 * 320;
+output.textContent = `Value: ${slider.value}`;
 
-let squareSize = Math.sqrt(containerArea / Math.pow(squareNumberPerSide, 2));
-container.style.gridTemplateColumns = `repeat(${squareNumberPerSide},1fr)`;
-
-drawGrid(squareNumberPerSide);
+slider.addEventListener("input", () => {
+  output.textContent = `Value: ${slider.value}`;
+  squareNumberPerSide = parseInt(slider.value);
+  drawGrid(squareNumberPerSide);
+});
 
 function drawGrid(squareNumberPerSide) {
+  container.innerHTML = "";
+  let containerArea = 320 * 320;
   let squareSize = Math.sqrt(containerArea / Math.pow(squareNumberPerSide, 2));
   container.style.gridTemplateColumns = `repeat(${squareNumberPerSide},1fr)`;
   for (let i = 0; i < squareNumberPerSide * squareNumberPerSide; i++) {
