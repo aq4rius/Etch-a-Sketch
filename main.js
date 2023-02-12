@@ -29,18 +29,23 @@ const squares = document.querySelectorAll("div.square");
 let squaresArray = Array.from(squares);
 
 document.addEventListener("mousedown", () => {
+  console.log("mousedown");
   isDrawing = true;
   document.addEventListener("mouseover", drawFunction);
 });
 
 document.addEventListener("mouseup", () => {
+  console.log("mouseup");
   isDrawing = false;
   document.removeEventListener("mouseover", drawFunction);
 });
 
 function drawFunction(e) {
+  console.log("Draw");
+  console.log(squaresArray.length);
   if (isDrawing) {
     for (let i = 0; i < squaresArray.length; i++) {
+      console.log(e);
       if (e.target === squaresArray[i]) {
         squaresArray[i].style.backgroundColor = "black";
       }
