@@ -6,8 +6,38 @@ output.textContent = `Value: ${slider.value}`;
 
 slider.addEventListener("input", () => {
   output.textContent = `Value: ${slider.value}`;
-  squareNumberPerSide = parseInt(slider.value);
+  squareNumberPerSide = slider.value;
   drawGrid(squareNumberPerSide);
+
+  const squares = document.querySelectorAll("div.square");
+  let squaresArray = Array.from(squares);
+
+  let firstSquare;
+
+  document.addEventListener("mousedown", (e) => {
+    firstSquare = e.target;
+    for (let i = 0; i < squaresArray.length; i++) {
+      if (firstSquare === squaresArray[i])
+        firstSquare.style.backgroundColor = "black";
+    }
+    isDrawing = true;
+    document.addEventListener("mouseover", drawFunction);
+  });
+
+  document.addEventListener("mouseup", () => {
+    isDrawing = false;
+    document.removeEventListener("mouseover", drawFunction);
+  });
+
+  function drawFunction(e) {
+    if (isDrawing) {
+      for (let i = 0; i < squaresArray.length; i++) {
+        if (e.target === squaresArray[i]) {
+          squaresArray[i].style.backgroundColor = "black";
+        }
+      }
+    }
+  }
 });
 
 function drawGrid(squareNumberPerSide) {
@@ -22,33 +52,5 @@ function drawGrid(squareNumberPerSide) {
     square.style.width = `${squareSize}px`;
     square.style.border = "1px solid";
     container.appendChild(square);
-  }
-}
-
-const squares = document.querySelectorAll("div.square");
-let squaresArray = Array.from(squares);
-
-document.addEventListener("mousedown", () => {
-  console.log("mousedown");
-  isDrawing = true;
-  document.addEventListener("mouseover", drawFunction);
-});
-
-document.addEventListener("mouseup", () => {
-  console.log("mouseup");
-  isDrawing = false;
-  document.removeEventListener("mouseover", drawFunction);
-});
-
-function drawFunction(e) {
-  console.log("Draw");
-  console.log(squaresArray.length);
-  if (isDrawing) {
-    for (let i = 0; i < squaresArray.length; i++) {
-      console.log(e);
-      if (e.target === squaresArray[i]) {
-        squaresArray[i].style.backgroundColor = "black";
-      }
-    }
   }
 }
