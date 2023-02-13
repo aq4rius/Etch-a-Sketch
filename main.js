@@ -23,7 +23,7 @@ function drawGrid(squareNumberPerSide) {
     square.classList.add("square");
     square.style.height = `${squareSize}px`;
     square.style.width = `${squareSize}px`;
-    square.style.border = "1px solid";
+    square.style.border = "0.5px solid #D4D4d4";
     container.appendChild(square);
   }
 }

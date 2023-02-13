@@ -5,18 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Etch-a-Sketch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles.css" />
     <script src="main.js" defer></script>
   </head>
   <body>
-    <div class="container"></div>
-    <p>
-      Drag the slider to set the number of squares per side and clear the grid.
-    </p>
-    <input type="range" min="1" max="60" value="16" id="slider" />
-    <span id="value"></span>
-    <br />
-    <span>Choose Color:</span>
-    <input type="color" id="colorDialogID" />
+    <main class="flex">
+    <div>
+      <h1>Etch-a-Sketch</h1>
+      <div class="container"></div>
+    </div>
+    <div class="options">
+      <p>
+        Drag the slider to set the number of squares per side and clear the
+        grid:
+      </p>
+      <input type="range" min="1" max="60" value="16" id="slider" />
+      <span id="value"></span>
+      <p>Choose Color:</p>
+      <input type="color" id="colorDialogID" />
+    </div>
+  </main>
+    <footer>
+      <span>Copyright &#169 2023 Aq4rius <a href="https://github.com/aq4rius" target=”_blank”><i class="fa fa-github"></i></a></span>
+  </footer>
   </body>
 </html>
