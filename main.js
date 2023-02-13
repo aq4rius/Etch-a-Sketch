@@ -1,43 +1,16 @@
 const container = document.querySelector(".container");
 const slider = document.querySelector("#slider");
 const output = document.querySelector("#value");
+const colorDialog = document.querySelector("#colorDialogID");
 
 output.textContent = `Value: ${slider.value}`;
+enableDrawing(true);
 
 slider.addEventListener("input", () => {
-  output.textContent = `Value: ${slider.value}`;
-  squareNumberPerSide = slider.value;
-  drawGrid(squareNumberPerSide);
-
-  const squares = document.querySelectorAll("div.square");
-  let squaresArray = Array.from(squares);
-
-  let firstSquare;
-
-  document.addEventListener("mousedown", (e) => {
-    firstSquare = e.target;
-    for (let i = 0; i < squaresArray.length; i++) {
-      if (firstSquare === squaresArray[i])
-        firstSquare.style.backgroundColor = "black";
-    }
-    isDrawing = true;
-    document.addEventListener("mouseover", drawFunction);
-  });
-
-  document.addEventListener("mouseup", () => {
-    isDrawing = false;
-    document.removeEventListener("mouseover", drawFunction);
-  });
-
-  function drawFunction(e) {
-    if (isDrawing) {
-      for (let i = 0; i < squaresArray.length; i++) {
-        if (e.target === squaresArray[i]) {
-          squaresArray[i].style.backgroundColor = "black";
-        }
-      }
-    }
-  }
+  enableDrawing(true);
+});
+colorDialog.addEventListener("change", () => {
+  enableDrawing(false);
 });
 
 function drawGrid(squareNumberPerSide) {
@@ -52,5 +25,49 @@ function drawGrid(squareNumberPerSide) {
     square.style.width = `${squareSize}px`;
     square.style.border = "1px solid";
     container.appendChild(square);
+  }
+}
+
+function enableDrawing(clear) {
+  let color = colorDialog.value;
+  output.textContent = `Value: ${slider.value}`;
+  squareNumberPerSide = slider.value;
+
+  if (clear) drawGrid(squareNumberPerSide);
+  else {
+    let ifClear = confirm("Clear the Grid?");
+    if (ifClear) drawGrid(squareNumberPerSide);
+    else {
+    }
+  }
+
+  const squares = container.querySelectorAll("div.square");
+  let squaresArray = Array.from(squares);
+
+  let firstSquare;
+  container.addEventListener("mousedown", (e) => {
+    e.preventDefault();
+    firstSquare = e.target;
+    for (let i = 0; i < squaresArray.length; i++) {
+      if (e.target === squaresArray[i])
+        firstSquare.style.backgroundColor = `${color}`;
+    }
+    isDrawing = true;
+    container.addEventListener("mouseover", drawFunction);
+  });
+
+  container.addEventListener("mouseup", () => {
+    isDrawing = false;
+    container.removeEventListener("mouseover", drawFunction);
+  });
+
+  function drawFunction(e) {
+    if (isDrawing) {
+      for (let i = 0; i < squaresArray.length; i++) {
+        if (e.target === squaresArray[i]) {
+          squaresArray[i].style.backgroundColor = `${color}`;
+        }
+      }
+    }
   }
 }
